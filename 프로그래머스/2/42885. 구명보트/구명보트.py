@@ -1,11 +1,11 @@
 def solution(people, limit):
-    people.sort() 
-    left, right = 0, len(people) - 1
     answer = 0
-
-    while left <= right:
-        if people[left] + people[right] <= limit:
-            left += 1
-        right -= 1
+    people.sort(reverse=True)
+    
+    for i in people:
+        total = i
+        if total + people[-1] <= limit : 
+            people.pop()
         answer += 1
+            
     return answer
