@@ -1,3 +1,7 @@
 def solution(s):
-    nums = list(map(int, s.split(' ')))
-    return str(min(nums))+" "+str(max(nums))
+    answer = ''
+    l = []
+    s = s.split(' ')
+    for i in s:
+        l.append(int(i))
+    return str(min(l))+ " " + str(max(l))
