@@ -1,23 +1,29 @@
-import itertools
+import math
+from itertools import permutations
 
-def solution(numbers):
-    number_chars = list(numbers)
-    unique_numbers = set()
-    
-    for length in range(1, len(numbers) + 1):
-        for perm in itertools.permutations(number_chars, length):
-            unique_numbers.add(int(''.join(perm)))
-    
-    answer = 0
-    for num in unique_numbers:
-        if check_prime(num):
-            answer += 1
-            
-    return answer
+def get_all_numbers(s):
+    result = set()
+    for r in range(1, len(s) + 1):
+        for p in permutations(s, r):
+            num = int(''.join(p))
+            result.add(num)
+    return result
 
-def check_prime(n):
-    if n <= 1: return False
-    for i in range(2, n):
-        if n%i == 0:
+def is_prime_number(x):
+    if x < 2:
+        return False
+    for i in range(2, int(math.sqrt(x)) + 1):
+        if x % i == 0:
             return False
     return True
+    
+def solution(numbers):
+    cnt = 0
+    nums = get_all_numbers(numbers)
+    print(nums)
+    for n in nums:
+        if is_prime_number(n):
+            print(n)
+            cnt+=1
+    
+    return cnt
