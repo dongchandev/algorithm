@@ -1,19 +1,14 @@
 from itertools import permutations
 
 def solution(k, dungeons):
-    max_dungeons = 0
-    
-    for perm in permutations(dungeons, len(dungeons)):  # 모든 순열 탐색
-        fatigue = k
-        count = 0
-        
-        for min_fatigue, consume_fatigue in perm:
-            if fatigue >= min_fatigue:
-                fatigue -= consume_fatigue
-                count += 1
-            else:
-                break
-        
-        max_dungeons = max(max_dungeons, count)
-    
-    return max_dungeons
+    max_cnt = 0
+    for p in permutations(dungeons):
+        stemina = k
+        term_cnt = 0
+        for r,s in p:
+            if stemina < r or stemina < s: break
+            stemina -= s
+            term_cnt += 1
+        if max_cnt<term_cnt:
+            max_cnt = term_cnt
+    return max_cnt
