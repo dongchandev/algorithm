@@ -1,15 +1,19 @@
-def solution(priorities, location):
-    answer = 0
-    
-    priorities = [[i,p] for i,p in enumerate(priorities)]
-    
-    while priorities:
-        now = priorities.pop(0)
-        if any(p[1] > now[1] for p in priorities):
-            priorities.append(now)
-        else:
-            if now[0] == location: 
-                return answer+1
-            answer+=1
-    return -1
+from collections import deque
 
+def solution(priorities, location):
+    q = deque(priorities)
+    answer = 0
+    while q:
+        m = max(q)
+        l = q.popleft()
+        location -= 1 
+        if l != m:
+            q.append(l)
+            if location < 0:
+                location = len(q) -1
+        else:
+            answer += 1
+            if location < 0:
+                break
+            
+    return answer
