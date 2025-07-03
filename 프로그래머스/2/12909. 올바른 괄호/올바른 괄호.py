@@ -1,11 +1,10 @@
 def solution(s):
     answer = True
     stack = []
-    for r in s:
-        if r == '(':
-            stack.append(r)
-        elif r == ')': 
-            if not stack: 
-                return False
-            stack.pop()  
-    return len(stack) == 0 
+    for i in s:
+        if len(stack)!= 0 and '(' != stack[-1:] and i==')':
+            stack.pop()
+        else:
+            stack.append(i)
+    print(stack)
+    return len(stack) == 0
